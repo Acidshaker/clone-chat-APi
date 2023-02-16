@@ -1,5 +1,6 @@
 const Users = require("../models/users.models");
 const { uuid } = require("uuidv4");
+const { hashPassword } = require("../utils/crypto");
 
 const findAllUsers = async () => {
   const data = await Users.findAll();
@@ -17,13 +18,23 @@ const findUserById = async (id) => {
   return data;
 };
 
+const findUserByEmail = async (email) => {
+  const data = await Users.findOne({
+    where: {
+      email: email,
+    },
+  });
+
+  return data;
+};
+
 const createNewUser = async (userObj) => {
   const newUser = {
     id: uuid(),
     firstName: userObj.firstName,
     lastName: userObj.lastName,
     email: userObj.email,
-    password: userObj.password,
+    password: hashPassword(userObj.password),
     profileImage: userObj.profileImage,
     isActive: userObj.isActive,
     phone: userObj.phone,
@@ -54,6 +65,7 @@ const deleteUser = async (id) => {
 module.exports = {
   findAllUsers,
   findUserById,
+  findUserByEmail,
   createNewUser,
   updateUser,
   deleteUser,

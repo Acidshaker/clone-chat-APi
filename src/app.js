@@ -2,8 +2,9 @@ const express = require("express");
 const initModels = require("./models/initModels");
 const db = require("./utils/database");
 const handleRes = require("./utils/handleResponses");
-const userRouter = require("./users/users.router");
 const conversationRouter = require("./conversations/conversations.router");
+const userRouter = require("./users/users.router");
+const authRouter = require("./auth/auth.router");
 
 const app = express();
 
@@ -42,6 +43,8 @@ app.get("/", (req, res) => {
 app.use("/api/v1", userRouter);
 
 app.use("/api/v1", conversationRouter);
+
+app.use("api/v1/auth", authRouter);
 
 app.use("*", (req, res) => {
   handleRes.error({

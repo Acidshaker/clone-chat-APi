@@ -95,7 +95,7 @@ const deleteUser = (req, res) => {
         success({
           res,
           data,
-          status: 204,
+          status: 200,
           message: "User has been deleted",
         });
       } else {
