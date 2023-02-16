@@ -16,14 +16,14 @@ const Conversations = db.define("conversations", {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  createdBy: {
-    type: DataTypes.UUID,
-    allowNull: false,
-    references: {
-      model: Users,
-      key: "id",
-    },
-  },
+  // createdBy: {
+  //   type: DataTypes.UUID,
+  //   allowNull: false,
+  //   references: {
+  //     model: Users,
+  //     key: "id",
+  //   },
+  // },
   isGroup: {
     type: DataTypes.BOOLEAN,
     defaultValue: false,

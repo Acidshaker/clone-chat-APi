@@ -13,8 +13,8 @@ const initModels = () => {
   Participants.belongsTo(Users);
   Users.hasMany(Participants);
 
-  Conversations.belongsTo(Users);
-  Users.hasMany(Conversations);
+  // Conversations.belongsTo(Users);
+  // Users.hasMany(Conversations);
 };
 
 module.exports = initModels;
