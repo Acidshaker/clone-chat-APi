@@ -1,10 +1,16 @@
 const userServices = require("./users.services");
+const passportJwt = require("../middlewares/auth.middleware");
 
 const router = require("express").Router();
 
 router.get("/users", userServices.getAllUsers);
 
 router.post("/users", userServices.postNewUser);
+
+router.get("/me", passportJwt, userServices.getMyUser);
+
+router.get("/me", passportJwt, userServices.deleteMyUser);
+//router.patch('/')
 
 router.get("/users/:id", userServices.getUserById);
 

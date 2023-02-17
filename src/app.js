@@ -5,6 +5,7 @@ const handleRes = require("./utils/handleResponses");
 const conversationRouter = require("./conversations/conversations.router");
 const userRouter = require("./users/users.router");
 const authRouter = require("./auth/auth.router");
+const passportJwt = require("./middlewares/auth.middleware");
 
 const app = express();
 
@@ -37,6 +38,12 @@ app.get("/", (req, res) => {
       users: "http://localhost:9000/api/v1/users",
       conversations: "http://localhost:9000/api/v1/conversations",
     },
+  });
+});
+
+app.get("/protected", passportJwt, (req, res) => {
+  res.status(200).json({
+    message: `Hola ${req.user.firstName} mensaje solo lo puedes ver si tienes la sesión iniciada`,
   });
 });
 

@@ -206,6 +206,50 @@ const putUser = (req, res) => {
     });
 };
 
+const getMyUser = (req, res) => {
+  const id = req.user.id;
+  userControllers
+    .findUserById(id)
+    .then((data) => {
+      success({
+        res,
+        status: 200,
+        message: "this is your current user",
+        data,
+      });
+    })
+    .catch((err) => {
+      error({
+        res,
+        status: 400,
+        message: "Something bad",
+        data: err,
+      });
+    });
+};
+
+const deleteMyUser = (req, res) => {
+  const id = req.user.id;
+  userControllers
+    .deleteUser(id)
+    .then(
+      success({
+        res,
+        data,
+        status: 200,
+        message: "User has been deleted",
+      })
+    )
+    .catch((err) => {
+      error({
+        res,
+        data,
+        status: 400,
+        message: "The request could not be completed",
+      });
+    });
+};
+
 module.exports = {
   getAllUsers,
   getUserById,
@@ -213,4 +257,6 @@ module.exports = {
   deleteUser,
   patchUser,
   putUser,
+  getMyUser,
+  deleteMyUser,
 };
